@@ -11,7 +11,7 @@ const UserSignUp = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    setUser({email:email,password:password,username:{firstname:firstname,lastname:lastname}}) 
+    setUser({email:email,password:password,fullName:{firstname:firstname,lastname:lastname}}) 
     setEmail('')
     setPassword('')
     setFirstname('')  
