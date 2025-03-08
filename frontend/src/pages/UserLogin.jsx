@@ -1,18 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import React,{ useState , useContext } from 'react'
+import { Link,useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import {UserDataContext} from '../context/UserContext'
+import Cookies from "universal-cookie";
+
 
 const UserLogin = () => {
+  const cookies = new Cookies();
   const [email,setEmail] = useState('')
   const[password,setPassword] = useState('')
-  const [user,setUser] = useState({})  
+  const {user,setUser} = useContext(UserDataContext)
+  const navigate = useNavigate()
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault()
-    setUser({email:email,password:password})
-    
+    const userData = {email:email,password:password}  
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`,userData)
     setEmail('')
     setPassword('')
+
+    if(response.status===200){
+      const data = response.data
+      const token = data.token
+      setUser(data.user)
+      cookies.set("token", token, { path: "/" });
+      navigate('/home')
+    }
   }
 
   return (

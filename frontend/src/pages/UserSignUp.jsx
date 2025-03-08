@@ -1,22 +1,52 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useContext,useState } from 'react'
+import { Link , useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'universal-cookie'
+import {UserDataContext} from '../context/UserContext'
 
 const UserSignUp = () => {
+  const cookies = new Cookies()
+  const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const[password,setPassword] = useState('')
   const[firstname,setFirstname] = useState('')
   const[lastname,setLastname] = useState('')  
-  const [user,setUser] = useState({})  
+  const {user,setUser} = useContext(UserDataContext)
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    setUser({email:email,password:password,fullName:{firstname:firstname,lastname:lastname}}) 
-    setEmail('')
-    setPassword('')
-    setFirstname('')  
-    setLastname('')
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newUser = {
+        email: email,
+        password: password,
+        fullname:{
+          firstname: firstname,
+          lastname: lastname
+        }
+      };
+  
+      const url = `${import.meta.env.VITE_BASE_URL}/user/register`;
+      const response = await axios.post(url, newUser, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.status === 201) {
+        setUser(response.data.user);
+        cookies.set('token',response.data.token,{path:'/'});
+        navigate('/home');
+      }
+  
+      setEmail('');
+      setPassword('');
+      setFirstname('');
+      setLastname('');
+    } catch (error) {
+      console.error('Error:', error.response?.data || error.message);
+      alert(error.response?.data?.message || 'Registration failed. Please try again.');
+    }
+  };
+  
 
   return (
     <div className='p-7 flex flex-col justify-between h-screen'>

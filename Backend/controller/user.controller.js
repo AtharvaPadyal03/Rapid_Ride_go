@@ -11,7 +11,6 @@ module.exports.registerUser = async (req,res,next)=>{
     }
 
     const {fullname,email,password} = req.body
-
     const findUser = await userModel.findOne({email})
     if(findUser){
         res.status(400).json({messege:'User already exist'})
@@ -30,7 +29,7 @@ module.exports.registerUser = async (req,res,next)=>{
     })
 
     const token = user.generateAuthToken()
-    res.status(200).json({messege:'User created successfully',token,user})
+    res.status(201).json({messege:'User created successfully',token,user})
 }
 
 module.exports.login = async(req,res,next)=>{
