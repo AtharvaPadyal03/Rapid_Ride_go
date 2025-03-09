@@ -1,15 +1,27 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'universal-cookie'
+import { CaptainDataContext } from '../context/CaptainContext'
 
 const CaptainLogin = () => {
+  const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const[password,setPassword] = useState('')
-  const [captain,setCaptain] = useState({})  
+  const {captain, setCaptain} = useContext(CaptainDataContext)
 
-  const handleSubmit = (e)=>{
+
+  const handleSubmit = async(e)=>{
     e.preventDefault()
-    setCaptain({email:email,password:password})
+    const captainData = {email:email,password:password}
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`,captainData)
+    if(response.status === 200){
+      const cookies = new Cookies()
+      cookies.set('token',response.data.token,{path:'/'})
+      setCaptain(response.data.captain)
+      navigate('/captain-home')
+    }
     setEmail('')
     setPassword('')
   }

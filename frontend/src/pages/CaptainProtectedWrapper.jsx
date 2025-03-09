@@ -1,39 +1,37 @@
-import React, { useContext, useEffect , useState} from 'react';
-import { UserDataContext } from '../context/UserContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { CaptainDataContext } from '../context/CaptainContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Cookies from 'universal-cookie';
+import axios from 'axios';
 
-const UserProtectedWrapper = ({ children }) => {
+const CaptainProtectedWrapper = ({ children }) => {
     const cookies = new Cookies();
     const token = cookies.get('token');
     const navigate = useNavigate();
+    const {captain,setCaptain} = useContext(CaptainDataContext);
     const [isLoading,setIsLoading] = useState(true);
-    const{user,setUser} = useContext(UserDataContext);
-
 
     useEffect(() => {
         if (!token) {
-            navigate('/login');
+            navigate('/captain-login');
         }
-
-        axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/captain/profile`, {
             headers:{
                 Authorization: `Bearer ${token}`
     
             }
         }).then((response)=>{
             if(response.status === 200){
-                setUser(response.data.user);
+                setCaptain(response.data.captain);
                 setIsLoading(false);
             }
         }).catch((error)=>{
             console.log(error);
             cookies.remove('token');
-            navigate('/login');
+            navigate('/captain-login');
         })
+    
     },[token]); 
-
     if(isLoading){
         return(
             <div>Loading...</div>
@@ -46,4 +44,4 @@ const UserProtectedWrapper = ({ children }) => {
     return <>{children}</>;
 };
 
-export default UserProtectedWrapper;
+export default CaptainProtectedWrapper;
