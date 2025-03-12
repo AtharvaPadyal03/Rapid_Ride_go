@@ -1,80 +1,36 @@
+# Backend API Documentation
 
-# /user/register Endpoint Documentation
+## /users/register Endpoint
 
-## Overview
+### Description
+This endpoint is used to register a new user.
 
-The `/user/register` endpoint allows new users to sign up by providing their details. The endpoint validates the input data, creates a new user by hashing the password, and returns an authentication token along with the user information once the user is successfully created.
+### Method
+`POST`
 
-## Endpoint Details
+### Required Data
+- `username` (string): The desired username of the user.
+- `email` (string): The email address of the user.
+- `password` (string): The password for the user account.
 
-- **Method:** POST  
-- **URL:** `/user/register`
+### Status Codes
+- `201 Created`: The user was successfully registered.
+- `400 Bad Request`: The request was invalid or missing required data.
+- `409 Conflict`: The username or email already exists.
+- `500 Internal Server Error`: An error occurred on the server.
 
-## Request Body
-
-The endpoint expects a JSON object with the following structure:
-
+### Example Request
 ```json
 {
-  "fullname": {
-    "firstname": "John",
-    "lastname": "Doe"   // This field is optional
-  },
-  "email": "john.doe@example.com",
-  "password": "password123"
+    "username": "john_doe",
+    "email": "john.doe@example.com",
+    "password": "securePassword123"
 }
 ```
 
-> **Note:**  
-> - `fullname.firstname` must be at least 3 characters long.  
-> - `email` must be a valid email address and at least 6 characters long.  
-> - `password` must be at least 8 characters long.
-
-## Responses
-
-### Success
-
-- **Status Code:** 200 OK  
-- **Response Body:**
-
+### Example Response
 ```json
 {
-  "messege": "User created successfully",
-  "token": "<JWT_TOKEN>",
-  "user": {
-    // user object with properties (note: password will be excluded due to select:false)
-  }
+    "message": "User registered successfully."
 }
 ```
-
-### Failure
-
-#### Validation Errors
-
-- **Status Code:** 400 Bad Request  
-- **Response Body:**
-
-```json
-{
-  "errors": [
-    {
-      "msg": "Error message indicating failed validation",
-      "param": "fieldName",
-      "location": "body"
-    }
-    // ... array of error objects for each validation issue
-  ]
-}
-```
-
-#### Missing Required Fields
-
-If any required field is missing when invoking the service, an error will be thrown indicating that all required fields must be provided.
-
-## Additional Information
-
-- The endpoint leverages input validation provided by [`express-validator`](https://github.com/express-validator/express-validator).
-- The user password is hashed using [`bcrypt`](https://www.npmjs.com/package/bcrypt) before saving.
-- A JWT token is generated using [`jsonwebtoken`](https://github.com/auth0/node-jsonwebtoken) when the user is created.
-```
-
