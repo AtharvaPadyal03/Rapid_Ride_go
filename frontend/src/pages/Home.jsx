@@ -1,12 +1,16 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useContext} from 'react'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
+import axios from 'axios'
+import Cookies from 'universal-cookie'
 import 'remixicon/fonts/remixicon.css'
 import LocationSearchPannel from '../components/LocationSearchPannel'
 import VehicalPannel from '../components/VehicalPannel'
 import ConfirmRide from '../components/ConfirmRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
+import { useNavigate } from 'react-router-dom';
+import { UserDataContext } from '../context/UserContext';
 
 const Home = () => {
   const [pickup,setPickup] = useState('')

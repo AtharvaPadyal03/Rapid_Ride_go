@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VehicalPannel = (props) => {
+const VehicalPanel = (props) => {
   return (
     <div>
         <h5 
@@ -53,4 +53,4 @@ const VehicalPannel = (props) => {
   )
 }
 
-export default VehicalPannel
+export default VehicalPanel
