@@ -89,6 +89,6 @@ npm start
 
 
 ## 📢 Follow
-➡️ [Follow me on GitHub](https://github.com/AtharvaPadyal03)|
+➡️ [Follow me on GitHub](https://github.com/AtharvaPadyal03)
 
 ⭐ Star this repository to support the project and help others discover it!
