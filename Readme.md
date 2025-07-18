@@ -81,7 +81,7 @@ Rapid Ride Go is a dynamic ride-hailing platform designed to make urban transpor
 ### Backend Setup
 
 ```bash
-git clone https://github.com/<your-username>/rapid-ride-go.git
+git clone https://github.com/AtharvaPadyal03/Rapid_Ride_go.git
 cd rapid-ride-go/backend
 npm install
 npm start
@@ -89,6 +89,6 @@ npm start
 
 
 ## 📢 Follow
-➡️ [Follow me on GitHub](https://github.com/AtharvaPadyal03)|
+➡️ [Follow me on GitHub](https://github.com/AtharvaPadyal03)
 
 ⭐ Star this repository to support the project and help others discover it!
