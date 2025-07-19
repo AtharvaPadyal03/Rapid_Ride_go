@@ -25,7 +25,7 @@ const CaptainRiding = () => {
   return (
     <div className='h-screen relative'>
         <div className='fixed flex p-6 top-0 items-center justify-between w-screen'>
-        <img className='w-16' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png" alt="" />
+        <img className='w-16' src="https://img.freepik.com/premium-photo/driver-with-opened-car-door_23-2149184257.jpg" alt="" />
         <Link to='/captain-logout' className=' h-10 w-10 bg-white flex items-center justify-center rounded-full'>
             <i className="text-lg font-medium ri-logout-box-line"></i>
         </Link>
