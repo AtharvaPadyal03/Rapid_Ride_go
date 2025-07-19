@@ -27,6 +27,11 @@ Rapid Ride Go is a dynamic ride-hailing platform designed to make urban transpor
 &nbsp;&nbsp;
 <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white">
 
+<img src="https://img.shields.io/badge/GOOgle Maps api-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white">
+
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+
+<img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 </div>
 
 ---
